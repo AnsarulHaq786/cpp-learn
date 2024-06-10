@@ -23,7 +23,7 @@ class dTime: public bTime{
         dSeconds=sec;
     }
     void displayAddTime(){
-        cout<<"Sum"<<endl<<(bHours+dHours)%24+(bMinutes+dMinutes)/60<<":"<<(bMinutes+dMinutes)%60+(bSeconds+dSeconds)/60<<":"<<(bSeconds+dSeconds)%60<<endl;
+        cout<<"Sum"<<endl<<(bHours+dHours)/24<<":"<<(bHours+dHours)%24+(bMinutes+dMinutes)/60<<":"<<(bMinutes+dMinutes)%60+(bSeconds+dSeconds)/60<<":"<<(bSeconds+dSeconds)%60<<endl;
     }
     friend class workingClass;
 };
@@ -34,9 +34,20 @@ class workingClass{
     int seconds;
     public:
     void displayDiffTime(dTime& o){
+        if(o.bSeconds>=o.dSeconds)
+            seconds=o.bSeconds-o.dSeconds;
+        else{
+            seconds=o.bSeconds+60-o.dSeconds;
+            o.bMinutes--;
+        }
+        if(o.bMinutes>=o.dMinutes)
+            minutes=o.bMinutes-o.dMinutes;
+        else{
+            minutes=o.bMinutes+60-o.dMinutes;
+            o.bHours--;
+        }
         hours=o.bHours-o.dHours;
-        minutes=o.bMinutes-o.dMinutes;
-        seconds=o.bSeconds-o.dSeconds;
+        
         cout<<"Difference"<<endl<<hours<<":"<<minutes<<":"<<seconds<<":"<<endl;
     }
 };
