@@ -1,0 +1,26 @@
+// leetcode: 525 Contiguos Array
+// brute force approach
+// forward biased solution
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        vector<int> newArr;
+        int i, n=nums.size(), maxLength;
+        for(i=0; i<n; i++){
+            if(nums[i]==0){
+                nums[i]--;
+            }
+            newArr.push_back(nums[i]);
+        }
+        for(i=1; i<n; i++){
+            newArr[i] = newArr[i-1] + nums[i];
+        }
+        for(i=n-1; i>=0; i--){
+            if(newArr[i]==0){
+                maxLength = i+1;
+                break;
+            }
+        }
+        return maxLength;
+    }
+};
